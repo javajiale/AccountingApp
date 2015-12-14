@@ -10,22 +10,63 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="X，Y"
         android:id="@+id/xy_textView"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="44dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginEnd="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="94dp"
-        android:layout_marginEnd="94dp" />
+        android:layout_alignParentEnd="true" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/food_imageButton"
+        android:layout_marginTop="139dp"
+        android:src="@drawable/food"
+        android:background="@android:color/transparent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/shopping_imageButton"
+        android:layout_below="@+id/food_imageButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/shopping"
+        android:background="@android:color/transparent"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/live_imageButton"
+        android:layout_below="@+id/shopping_imageButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/live"
+        android:background="@android:color/transparent"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/car_imageButton"
+        android:layout_below="@+id/live_imageButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/car"
+        android:background="@android:color/transparent"/>
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/spread_pie_chart"
+        android:layout_width="match_parent"
+        android:layout_height="320dip"
+        android:layout_gravity="center_horizontal"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="83dp"
-        android:src="@drawable/food"
-        android:background="@android:color/transparent"/>
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="70dp"/>
 
 </RelativeLayout>
