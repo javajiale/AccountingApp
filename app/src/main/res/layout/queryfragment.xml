@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
 
+    <com.javajiale.accounting.SlideCutListView
+        android:layout_marginTop="60dp"
+        android:id="@+id/slideCutListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent"
+        android:divider="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        >
+
+    </com.javajiale.accounting.SlideCutListView>
 </RelativeLayout>

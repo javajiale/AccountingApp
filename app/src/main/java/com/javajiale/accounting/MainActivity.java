@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,15 @@ public class MainActivity extends FragmentActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        DBHelper helper = new DBHelper(MainActivity.this,"acc.db",null,1);
+        try{
+            //helper.deleteDatabase(MainActivity.this);
+            helper.createDatabase(MainActivity.this);
+        }catch (IOException e ){
+            e.printStackTrace();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -33,6 +43,7 @@ public class MainActivity extends FragmentActivity implements
 
         pager = (ViewPager)findViewById(R.id.pager);
         adapter = new MainPageAdapter(getSupportFragmentManager(),fragments);
+
         pager.setAdapter(adapter);
         pager.setOffscreenPageLimit(fragments.size() - 1);
         pager.setOnPageChangeListener(this);
@@ -100,5 +111,9 @@ public class MainActivity extends FragmentActivity implements
             default:
                 break;
         }
+    }
+
+    public MainPageAdapter getAdapter(){
+        return adapter;
     }
 }
