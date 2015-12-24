@@ -2,6 +2,7 @@ package com.javajiale.accounting;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.media.Image;
@@ -50,13 +51,23 @@ public class MainFragment extends Fragment {
         final ImageButton btn_shopping = (ImageButton)getActivity().findViewById(R.id.shopping_imageButton);
         final ImageButton btn_car = (ImageButton)getActivity().findViewById(R.id.car_imageButton);
         final ImageButton btn_live = (ImageButton)getActivity().findViewById(R.id.live_imageButton);
+        final ImageButton btn_refresh = (ImageButton)getActivity().findViewById(R.id.refresh);
+
+        mChart = (PieChart) getActivity().findViewById(R.id.spread_pie_chart);
 
         btn_food.setOnTouchListener(new tuoListener1());
         btn_shopping.setOnTouchListener(new tuoListener2());
         btn_live.setOnTouchListener(new tuoListener3());
         btn_car.setOnTouchListener(new tuoListener4());
+        btn_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PieData mPieData = getPieData(4, 100);
+                showChart(mChart, mPieData);
+            }
+        });
 
-        mChart = (PieChart) getActivity().findViewById(R.id.spread_pie_chart);
+
         PieData mPieData = getPieData(4, 100);
         showChart(mChart, mPieData);
     }
@@ -88,10 +99,12 @@ public class MainFragment extends Fragment {
                 case MotionEvent.ACTION_UP:
                     int xx =  (x + v.getWidth() - temp[0]);
                     int yy = ( y - temp[1] + v.getHeight());
-                    text.setText("");
-                    if( xx > 200 && ( yy > 365 && yy < 754 )){
-                        tankuang();
+                    text.setText("");//xx+","+yy
+                    if( xx > 200 && ( yy > 392 && yy < 897 )){
+                        tankuang("food");
+
                     }
+
                     break;
             }
 
@@ -101,7 +114,7 @@ public class MainFragment extends Fragment {
 
     }
 
-    private void tankuang(){
+    private void tankuang(final String type){
         final CustomDialog.Builder builder = new CustomDialog.Builder(getActivity());
         builder.setTitle("提示");
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -111,12 +124,15 @@ public class MainFragment extends Fragment {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 
 
-                String sql = "insert into acc_list(beizhu,food) values ( '"+builder.getMessage2()+"',"+
+                String sql = "insert into acc_list(beizhu,"+type+") values ( '"+builder.getMessage2()+"',"+
                         builder.getMessage1()+")";
                 db.execSQL(sql);
 
                 dialog.dismiss();
                 //设置你的操作事项
+
+                PieData mPieData = getPieData(4, 100);
+                showChart(mChart, mPieData);
 
             }
         });
@@ -157,7 +173,13 @@ public class MainFragment extends Fragment {
                     break;
 
                 case MotionEvent.ACTION_UP:
-                    text.setText("");
+                    int xx =  (x + v.getWidth() - temp[0]);
+                    int yy = ( y - temp[1] + v.getHeight());
+                    text.setText("");//xx+","+yy
+                    if( xx > 200 && ( yy > 392 && yy < 897 )){
+                        tankuang("shopping");
+                    }
+
                     break;
             }
 
@@ -192,7 +214,13 @@ public class MainFragment extends Fragment {
                     break;
 
                 case MotionEvent.ACTION_UP:
-                    text.setText("");
+                    int xx =  (x + v.getWidth() - temp[0]);
+                    int yy = ( y - temp[1] + v.getHeight());
+                    text.setText("");//xx+","+yy
+                    if( xx > 200 && ( yy > 392 && yy < 897 )){
+                        tankuang("live");
+                    }
+
                     break;
             }
 
@@ -227,7 +255,13 @@ public class MainFragment extends Fragment {
                     break;
 
                 case MotionEvent.ACTION_UP:
-                    text.setText("");
+                    int xx =  (x + v.getWidth() - temp[0]);
+                    int yy = ( y - temp[1] + v.getHeight());
+                    text.setText("");//xx+","+yy
+                    if( xx > 200 && ( yy > 392 && yy < 897 )){
+                        tankuang("car");
+                    }
+
                     break;
             }
 
@@ -314,10 +348,26 @@ public class MainFragment extends Fragment {
          * 将一个饼形图分成四部分， 四部分的数值比例为14:14:34:38
          * 所以 14代表的百分比就是14%
          */
-        float quarterly1 = 14;
-        float quarterly2 = 14;
-        float quarterly3 = 34;
-        float quarterly4 = 38;
+
+        DBHelper dbHelper = new DBHelper(getActivity(),"acc.db",null,1);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.query("acc_list", new String[]{"sum(shopping)", "sum(food)", "sum(live)", "sum(car)"}, null, null, null, null, null);
+        float shopping = 0;
+        float food = 0;
+        float live = 0;
+        float car = 0;
+        while(cursor.moveToNext()) {
+             shopping = cursor.getFloat(0);
+             food = cursor.getFloat(1);
+             live = cursor.getFloat(2);
+             car = cursor.getFloat(3);
+        }
+        float sum = shopping+food+live+car;
+
+        float quarterly1 = shopping/sum;
+        float quarterly2 = food/sum;
+        float quarterly3 = live/sum;
+        float quarterly4 = car/sum;
 
         yValues.add(new Entry(quarterly1, 0));
         yValues.add(new Entry(quarterly2, 1));

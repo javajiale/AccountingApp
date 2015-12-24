@@ -44,8 +44,10 @@ public class MainActivity extends FragmentActivity implements
         pager = (ViewPager)findViewById(R.id.pager);
         adapter = new MainPageAdapter(getSupportFragmentManager(),fragments);
 
+
         pager.setAdapter(adapter);
-        pager.setOffscreenPageLimit(fragments.size() - 1);
+        pager.setCurrentItem(1);
+        pager.setOffscreenPageLimit(0);//预加载页数
         pager.setOnPageChangeListener(this);
 
         group = (RadioGroup) findViewById(R.id.titlegroup);

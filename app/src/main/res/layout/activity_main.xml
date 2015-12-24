@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_image">
+    android:background="@drawable/bgbgbg">
 
     <RadioGroup
         android:id="@+id/titlegroup"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        >
 
         <RadioButton
             android:id="@+id/query_button"
@@ -17,11 +18,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
-            android:checked="true"
             android:drawableBottom="@drawable/tab"
             android:gravity="center"
             android:tag="0"
-            android:text="Query"
+            android:text="账目清单"
+            android:textColor="#000000"
             />
 
         <RadioButton
@@ -33,7 +34,9 @@
             android:drawableBottom="@drawable/tab"
             android:gravity="center"
             android:tag="1"
-            android:text="Main"
+            android:checked="true"
+            android:text="记账"
+            android:textColor="#000000"
             />
 
         <RadioButton
@@ -45,7 +48,8 @@
             android:drawableBottom="@drawable/tab"
             android:gravity="center"
             android:tag="2"
-            android:text="Static"
+            android:text="统计"
+            android:textColor="#000000"
             />
     </RadioGroup>
 

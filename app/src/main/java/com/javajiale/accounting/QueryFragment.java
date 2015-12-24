@@ -106,7 +106,7 @@ public class QueryFragment extends Fragment implements SlideCutListView.RemoveLi
 //            String food = cursor.getString(3);
 //            String live = cursor.getString(4);
 //            String car = cursor.getString(5);
-            String put = cursor.getString(0);
+            String put = cursor.getString(0)+"  ";
             for(int i = 1; i < 6; i++)
             {
                 if(i == 2)
