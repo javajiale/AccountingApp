@@ -5,9 +5,49 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <RelativeLayout android:id="@+id/top"
+        android:layout_width="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@android:color/transparent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rlSearchFrameDelete"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical" >
+
+            <EditText android:id="@+id/etSearch"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:background="@drawable/search_frame"
+                android:layout_marginRight="10dp"
+                android:paddingLeft="32dp"
+                android:textSize="12sp"
+                android:hint="Searching..."
+                />
+
+            <ImageView android:id="@+id/ivDeleteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/delete"
+                android:layout_centerInParent="true"
+                android:paddingRight="20dp"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
 
     <com.javajiale.accounting.SlideCutListView
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="120dp"
         android:id="@+id/slideCutListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,4 +58,6 @@
         >
 
     </com.javajiale.accounting.SlideCutListView>
+
+
 </RelativeLayout>

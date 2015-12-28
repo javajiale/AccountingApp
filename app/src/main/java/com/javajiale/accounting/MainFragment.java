@@ -24,7 +24,9 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by javajiale on 2015/12/8.
@@ -123,9 +125,11 @@ public class MainFragment extends Fragment {
                 DBHelper dbHelper = new DBHelper(getActivity(),"acc.db",null,1);
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
 
-                String sql = "insert into acc_list(beizhu,"+type+") values ( '"+builder.getMessage2()+"',"+
-                        builder.getMessage1()+")";
+
+                String sql = "insert into acc_list(beizhu,"+type+",time) values ( '"+builder.getMessage2()+"',"+
+                        builder.getMessage1()+",'"+df.format(new Date())+"')";
                 db.execSQL(sql);
 
                 dialog.dismiss();
